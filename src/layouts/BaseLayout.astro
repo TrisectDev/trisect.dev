@@ -1,0 +1,66 @@
+---
+const { title } = Astro.props;
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{title}</title>
+    <style is:global>
+      body {
+        background-color: #111;
+        color: #eaeaea;
+        font-family: 'JetBrains Mono', monospace;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+      .container {
+        text-align: center;
+        max-width: 700px; /* Increased width */
+        padding: 2rem;
+      }
+      h1 { font-size: 2.5rem; }
+      p { font-size: 1.2rem; line-height: 1.6; }
+      a {
+        color: #00ff99;
+        text-decoration: none; /* Unified link style */
+      }
+      a:hover {
+        text-decoration: underline; /* Unified link hover style */
+      }
+      a.blog-button {
+        background-color: #00ff99;
+        color: #111;
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: bold;
+      }
+      a.blog-button:hover {
+        background-color: #00cc77;
+      }
+      .tag {
+        display: inline-block;
+        background-color: #333;
+        color: #ccc;
+        padding: 0.25rem 0.6rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: bold;
+        text-decoration: none;
+      }
+      .tag:hover {
+        background-color: #444;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <slot /> <!-- your content is injected here -->
+    </main>
+  </body>
+</html>
