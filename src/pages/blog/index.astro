@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { formatDate } from '../../utils/date';
+
+const allBlogPosts = await getCollection('blog', ({ data }) => {
+  return data.pubDate < new Date(); // Sortowanie i filtrowanie
+});
+
+// Get all unique tags from all posts
+const allTags = [...new Set(allBlogPosts.flatMap(post => post.data.tags || []))].sort();
+---
+<style>
+  /* All general styles are now in BaseLayout.astro */
+  /* These styles are specific to the blog index list */
+  ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+  }
+
+  .post-item {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 1rem;
+    /* For filtering animation */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .post-item.hidden {
+    display: none;
+  }
+
+  .post-item:last-child {
+    border-bottom: none;
+  }
+
+  .post-title {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .post-meta {
+    font-size: 0.8rem;
+    color: #aaa;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* New styles for the tag filter buttons */
+  .tag-filter {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #333;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .tag-filter-label {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .tag-filter-btn {
+    background-color: #333;
+    color: #ccc;
+    border: 1px solid #444;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+  }
+
+  .tag-filter-btn:hover {
+    background-color: #444;
+    border-color: #555;
+    color: #fff;
+  }
+
+  .tag-filter-btn.active {
+    background-color: #00ff99;
+    color: #111;
+    border-color: #00ff99;
+    font-weight: bold;
+  }
+</style>
+<BaseLayout title="Trisect Devlog">
+  <h1>Trisect Devlog</h1>
+  <nav>
+    <a href="/">&larr; Back to Home</a>
+  </nav>
+  <hr style="margin: 2rem 0;"/>
+
+  <!-- Tag Filter UI -->
+  <!-- Uncomment when more posts will be posted!
+  <div class="tag-filter">
+    <span class="tag-filter-label">Filter by Tag:</span>
+    <button class="tag-filter-btn active" data-tag="all">Show All</button>
+    {allTags.map(tag => (
+      <button class="tag-filter-btn" data-tag={tag}>{tag}</button>
+    ))}
+  </div>
+  -->
+
+  <ul>
+    {allBlogPosts.map(post => (
+      <li class="post-item" data-tags={post.data.tags?.join(',')}>
+        <a class="post-title" href={`/blog/${post.slug}/`}>{post.data.title}</a>
+        <div class="post-meta">
+          <span class="publish-date">Published on: {formatDate(post.data.pubDate)}</span>
+          <!-- Uncomment when more posts will be posted!
+          {post.data.tags?.length > 0 && (
+            <div class="tags-container">
+              {post.data.tags.map(tag => (
+                <a href={`/blog/tags/${tag}`} class="tag">{tag}</a>
+              ))}
+            </div>
+          )}
+          -->
+        </div>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>
+
+<!-- Uncomment when more posts will be posted!
+<script>
+  const filterButtons = document.querySelectorAll('.tag-filter-btn');
+  const postItems = document.querySelectorAll('.post-item');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Update active button
+      document.querySelector('.tag-filter-btn.active').classList.remove('active');
+      button.classList.add('active');
+
+      const selectedTag = button.dataset.tag;
+
+      // Filter posts
+      postItems.forEach(item => {
+        item.classList.remove('hidden'); // Reset visibility
+        if (selectedTag === 'all') {
+          item.style.display = 'block';
+        } else {
+          const itemTags = item.dataset.tags?.split(',') || [];
+          if (itemTags.includes(selectedTag)) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        }
+      });
+    });
+  });
+</script>
+-->

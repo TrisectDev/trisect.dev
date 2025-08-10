@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import { formatDate } from '../../utils/date';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+  return blogEntries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+<BaseLayout title={entry.data.title}>
+  <article style="text-align: left;">
+    <h1>{entry.data.title}</h1>
+      <p>
+        <small>
+          Published on: {formatDate(entry.data.pubDate)}
+          <br>
+          Author: {entry.data.author}</small>
+        </small>
+      </p>
+
+    <!-- Uncomment when more posts will be posted!
+      {entry.data.tags?.length > 0 && (
+        <div style="margin-bottom: 1rem;">
+        {entry.data.tags.map(tag => (
+          <a href={`/blog/tags/${tag}`} class="tag">{tag}</a>
+        ))}
+      </div>
+       
+    )} -->
+    <hr>
+    <Content />
+    <hr>
+    <nav style="display: flex; justify-content: space-between; margin-top: 2rem;">
+      <a href="/blog">&larr; Back to Devlog Index</a>
+      <a href="/">&larr; Back to Home</a>
+    </nav>
+  </article>
+</BaseLayout>
