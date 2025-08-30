@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { formatDate } from '../../utils/date';
+import { formatDate } from '@/utils/date';
 
 const allBlogPosts = await getCollection('blog', ({ data }) => {
   return data.pubDate < new Date(); // Sortowanie i filtrowanie

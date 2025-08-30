@@ -7,8 +7,6 @@ tags:
   - systems
 ---
 
-# 🌌 How I Made a 2D Space Game Feel 2.5D (With One Simple Trick)
-
 Game dev isn’t about more code.  
 It’s about **crafting experience** — making players *feel* the world.
 
