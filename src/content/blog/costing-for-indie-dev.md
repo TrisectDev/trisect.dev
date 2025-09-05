@@ -9,8 +9,6 @@ tags:
   - productivity
 ---
 
-# How my costing & commercial background helps me manage indie dev
-
 **Estimated read time:** 7–9 minutes
 
 I didn't start as an artist, designer or developer. I started with spreadsheets, budgets, and project costing. That training taught me to translate fuzzy ideas into line items with risks, costs, and expected returns. When I moved into indie game development, that commercial lens didn't disappear — it became a tool.
