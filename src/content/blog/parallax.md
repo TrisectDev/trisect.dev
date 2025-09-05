@@ -7,6 +7,8 @@ tags:
   - systems
 ---
 
+**Estimated read time:** 4–6 minutes
+
 Game dev isn’t about more code.  
 It’s about **crafting experience** — making players *feel* the world.
 
