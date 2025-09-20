@@ -62,7 +62,7 @@ This division of labor keeps cost and attention in balance: the agent does heavi
 
 ## Two high-leverage use cases
 
-### Getting unstuck gracefully
+### Getting unstuck
 - Ask for **strategies, not just answers**: “List 3 approaches, with trade-offs” then choose and implement.  
 - Have the model generate tests that demonstrate the approach; use passing tests as the acceptance gate.
 - Keep ownership: treat outputs as drafts, integrate deliberately, and document the decision in a short note.  
