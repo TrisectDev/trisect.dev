@@ -1,3 +1,15 @@
+---
+title: 'AI Raises Floor, Humans Set Ceiling in Games'
+pubDate: 2026-03-15
+description: 'This post argues that AI will fracture the gaming industry by drastically lowering production costs. While it threatens jobs and commoditizes art, human taste, curation, and authentic connection will ultimately differentiate surviving studios from AI-generated content.'
+tags:
+  - essey
+  - projection
+  - ai
+---
+
+**Estimated read time:** 4–5 minutes 
+
 AI will not destroy gaming.
 
 It will fracture it.
